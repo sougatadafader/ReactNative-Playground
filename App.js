@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import {
   Switch,
   ScrollView,
@@ -7,6 +8,8 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
+import {LinearGradient} from 'expo';
+
 import { Constants } from 'expo';
 import * as Animatable from 'react-native-animatable';
 import Collapsible from 'react-native-collapsible';
@@ -71,27 +74,34 @@ export default class App extends Component {
 
   renderHeader = (section, _, isActive) => {
     return (
+
         <Animatable.View
             duration={400}
             style={[styles.header, isActive ? styles.active : styles.inactive]}
-            transition="backgroundColor"
-        >
-          <Text style={styles.headerText}>{section.title}</Text>
+            transition="backgroundColor">
+
+          <Text style={styles.headerText}>
+            {section.title}
+          </Text>
         </Animatable.View>
     );
   };
 
   renderContent(section, _, isActive) {
     return (
+        <LinearGradient
+            colors={['#89f7fe', '#66a6ff']}>
         <Animatable.View
             duration={400}
             style={[styles.content, isActive ? styles.active : styles.inactive]}
-            transition="backgroundColor"
-        >
+            transition="backgroundColor">
+
           <Animatable.Text animation={isActive ? 'bounceIn' : undefined}>
             {section.content}
           </Animatable.Text>
+
         </Animatable.View>
+        </LinearGradient>
     );
   }
 
@@ -100,6 +110,7 @@ export default class App extends Component {
 
     return (
         <View style={styles.container}>
+
           <ScrollView contentContainerStyle={{ paddingTop: 30 }}>
             <Text style={styles.title}>Welcome to Bread</Text>
 
@@ -112,6 +123,7 @@ export default class App extends Component {
                   }
               />
             </View>
+
 
             {/*<View style={styles.selectors}>
               <Text style={styles.selectTitle}>Select:</Text>
@@ -140,14 +152,19 @@ export default class App extends Component {
                 <Text style={styles.headerText}>Single Collapsible</Text>
               </View>
             </TouchableOpacity>*/}
+
             <Collapsible collapsed={this.state.collapsed} align="center">
+
               <View style={styles.content}>
                 <Text>
+
                   Bacon ipsum dolor amet chuck turducken landjaeger tongue spare
                   ribs
                 </Text>
               </View>
+
             </Collapsible>
+
             <Accordion
                 activeSections={activeSections}
                 sections={CONTENT}
@@ -155,7 +172,7 @@ export default class App extends Component {
                 expandMultiple={multipleSelect}
                 renderHeader={this.renderHeader}
                 renderContent={this.renderContent}
-                duration={700}
+                duration={400}
                 onChange={this.setSections}
             />
           </ScrollView>
@@ -168,38 +185,43 @@ const styles = StyleSheet.create({
   container: {
     //background of the page
     flex: 1,
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#304352',
     paddingTop: Constants.statusBarHeight,
+
   },
   title: {
     textAlign: 'center',
     fontSize: 22,
     fontWeight: '300',
     marginBottom: 20,
+    color:'#fff'
+
   },
   header: {
     //Single Collapsible Header
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#1db954',
     padding: 10,
+
   },
   headerText: {
     textAlign: 'center',
     fontSize: 16,
     fontWeight: '500',
+
   },
   content: {
     padding: 20,
-    backgroundColor: '#fff',
+   // backgroundColor: '#fff',
   },
   active: {
     //content background - Active
-    backgroundColor: 'rgba(255,255,255,1)',
+    //backgroundColor: 'rgba(0,255,255,1)',
   },
   inactive: {
     //unexpanded blocks
     borderRadius: 4,
     borderWidth: 2,
-    borderColor: '#d6d7da',
+    borderColor: '#d7d2cc',
     padding:50,
     //backgroundColor: 'rgba(25,252,255,1)',
   },
@@ -227,6 +249,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   multipleToggle__title: {
+    color:'#fff',
     fontSize: 16,
     marginRight: 8,
   },
